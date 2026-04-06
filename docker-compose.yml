@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: dropx-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://minipc:3306/my_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: pass.mysql
+      MINIO_ENDPOINT: http://localhost:9000
+      MINIO_ACCESS_KEY: my_minio
+      MINIO_SECRET_KEY: ABab1234.$
+    networks:
+      - my_network
+
+  frontend:
+    build: ./frontend
+    container_name: dropx-frontend
+    depends_on:
+      - backend
+    ports:
+      - "2096:2096"
+    networks:
+      - my_network
