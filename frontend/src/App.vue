@@ -167,7 +167,7 @@
 
     <footer class="footer">
       <div class="content has-text-centered">
-        <p class="is-size-7 has-text-grey">DropX - 临时文件/文本中转站 · 内容将在24小时后自动删除</p>
+        <p class="is-size-7 has-text-grey">DropX - 临时文本/文件中转站</p>
       </div>
     </footer>
 
@@ -225,7 +225,6 @@
           <button class="delete" @click="showPrivacy = false"></button>
         </header>
         <section class="modal-card-body">
-          <h5 class="title is-5">数据存储</h5>
           <ul>
             <li>所有文本/文件将在上传后 24 小时自动删除，不会长期存储。</li>
             <li>存入内容后提取码仅展示一次，凭提取码提取文本/文件。</li>

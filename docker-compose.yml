@@ -23,3 +23,7 @@ services:
       - "2096:2096"
     networks:
       - my_network
+
+networks:
+  my_network:
+    driver: bridge

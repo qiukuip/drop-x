@@ -2,7 +2,9 @@
 
 cd "$(dirname "$0")"
 
-docker-compose up -d
+
+
+podman-compose up -d
 
 echo "All services started"
 echo "Frontend: http://localhost"
