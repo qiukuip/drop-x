@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="day.happy365.dropx.mapper.ContentMapper">
+
+    <resultMap id="ContentResultMap" type="day.happy365.dropx.model.Content">
+        <id property="contentId" column="content_id"/>
+        <result property="extractCode" column="extract_code"/>
+        <result property="contentType" column="content_type"/>
+        <result property="objectName" column="object_name"/>
+        <result property="status" column="status"/>
+        <result property="expireAt" column="expire_at"/>
+        <result property="createAt" column="create_at"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="contentId">
+        INSERT INTO dx_content (extract_code, content_type, object_name, status, expire_at)
+        VALUES (#{extractCode}, #{contentType}, #{objectName}, #{status}, #{expireAt})
+    </insert>
+
+    <select id="findByExtractCode" resultMap="ContentResultMap">
+        SELECT content_id, extract_code, content_type, object_name, status, expire_at, create_at
+        FROM dx_content
+        WHERE extract_code = #{extractCode}
+          AND content_type = #{contentType}
+          AND status = 'Y'
+          AND expire_at > NOW()
+    </select>
+
+    <select id="countByExtractCode" resultType="int">
+        SELECT COUNT(1)
+        FROM dx_content
+        WHERE extract_code = #{extractCode}
+          AND status = 'Y'
+          AND expire_at > NOW()
+    </select>
+
+    <update id="updateExpiredStatus">
+        UPDATE dx_content SET status = 'N' WHERE expire_at &lt; NOW() AND status = 'Y'
+    </update>
+
+    <update id="markAsUsed">
+        UPDATE dx_content SET status = 'N' WHERE content_id = #{contentId}
+    </update>
+
+</mapper>

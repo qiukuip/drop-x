@@ -1,0 +1,23 @@
+server:
+  port: 8000
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5GB
+      max-request-size: 5GB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://minipc:3306/my_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: pass.mysql
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: day.happy365.dropx.model
+
+minio:
+  endpoint: http://minipc:9000
+  access-key: my_minio
+  secret-key: ABab1234.$
+  bucket-name: dropx
